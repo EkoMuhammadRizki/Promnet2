@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PustakaNusa - Perpustakaan Digital Modern untuk Akses Literasi & Buku Berkualitas. Sistem Manajemen Katalog & Peminjaman Online.">
+  <meta name="theme-color" content="#4f46e5">
+  <title>PustakaNusa | Perpustakaan Digital</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar-header" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" id="brand-logo">
+        <div class="logo-icon">
+          <i class="fa-solid => fa-book-bookmark"></i>
+        </div>
+        <span class="brand-name">Pustaka<span class="highlight">Nusa</span></span>
+      </a>
+
+      <!-- Navbar Only Has "Home" as explicitly requested -->
+      <nav class="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#" class="nav-link active" id="nav-home">
+              <i class="fa-solid fa-house"></i> Home
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="my-borrowed-btn" class="btn-secondary nav-btn" title="Buku Saya Dipinjam">
+          <i class="fa-solid fa-book-reader"></i>
+          <span class="badge-count" id="borrow-count">0</span>
+        </button>
+        <button id="theme-toggle" class="icon-btn" aria-label="Ubah Tema">
+          <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="hero-bg" style="background-image: url('assets/hero.jpg');"></div>
+      <div class="hero-overlay"></div>
+      
+      <div class="container hero-content">
+        <div class="hero-badge">
+          <i class="fa-solid fa-sparkles"></i> Perpustakaan Digital Generasi Baru
+        </div>
+        <h1 class="hero-title">Jelajahi Cakrawala Ilmu Tanpa Batas</h1>
+        <p class="hero-subtitle">
+          Temukan ribuan koleksi buku fisik &amp; digital, jurnal ilmiah, dan literatur pilihan terbaik. Kelola peminjaman buku dengan cepat, mudah, dan transparan.
+        </p>
+
+        <!-- Search Bar in Hero -->
+        <div class="hero-search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="hero-search-input" placeholder="Cari judul buku, penulis, atau kata kunci (contoh: Pemrograman, Novel, Sejarah)..." autocomplete="off">
+          <button class="btn-primary" id="hero-search-btn">Cari Buku</button>
+        </div>
+
+        <!-- Quick Stats Banner -->
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-books"></i></div>
+            <div class="stat-info">
+              <span class="stat-number" data-target="12450">12,450+</span>
+              <span class="stat-label">Koleksi Buku</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="stat-info">
+              <span class="stat-number" data-target="3820">3,820+</span>
+              <span class="stat-label">Anggota Aktif</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-bookmark"></i></div>
+            <div class="stat-info">
+              <span class="stat-number" data-target="18">18</span>
+              <span class="stat-label">Kategori Utama</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section class="catalog-section" id="katalog">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">Koleksi Pustaka</div>
+          <h2 class="section-title">Katalog Buku Terbaru &amp; Populer</h2>
+          <p class="section-description">Cari buku favoritmu berdasarkan kategori, ketersediaan, atau judul buku.</p>
+        </div>
+
+        <!-- Catalog Controls & Filters -->
+        <div class="catalog-controls">
+          <div class="category-pills" id="category-pills">
+            <button class="pill-btn active" data-category="all">Semua</button>
+            <button class="pill-btn" data-category="Teknologi">Teknologi</button>
+            <button class="pill-btn" data-category="Fiksi">Fiksi &amp; Novel</button>
+            <button class="pill-btn" data-category="Sains">Sains &amp; Edukasi</button>
+            <button class="pill-btn" data-category="Sejarah">Sejarah &amp; Budaya</button>
+            <button class="pill-btn" data-category="Bisnis">Bisnis &amp; Finansial</button>
+          </div>
+
+          <div class="filter-controls">
+            <div class="select-wrapper">
+              <i class="fa-solid fa-filter select-icon"></i>
+              <select id="status-filter">
+                <option value="all">Status: Semua</option>
+                <option value="available">Tersedia</option>
+                <option value="borrowed">Sedang Dipinjam</option>
+              </select>
+            </div>
+
+            <div class="select-wrapper">
+              <i class="fa-solid fa-sort select-icon"></i>
+              <select id="sort-select">
+                <option value="title-asc">Judul (A - Z)</option>
+                <option value="year-desc">Terbaru</option>
+                <option value="rating-desc">Rating Tertinggi</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Book Grid -->
+        <div class="book-grid" id="book-grid">
+          <!-- Dynamic Content generated by JS -->
+        </div>
+
+        <!-- Empty State Message -->
+        <div class="empty-state hidden" id="empty-state">
+          <i class="fa-solid fa-book-open empty-icon"></i>
+          <h3>Buku Tidak Ditemukan</h3>
+          <p>Tidak ada buku yang sesuai dengan kata kunci atau filter yang Anda pilih.</p>
+          <button class="btn-secondary" id="reset-filter-btn">Reset Filter Search</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services / Features Section -->
+    <section class="services-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-subtitle">Layanan Pustaka</div>
+          <h2 class="section-title">Fasilitas &amp; Keunggulan PustakaNusa</h2>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div>
+            <h3>Katalog Digital Real-Time</h3>
+            <p>Pantau posisi rak dan ketersediaan buku secara langsung dari perangkat desktop maupun ponsel pintar Anda.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <h3>Peminjaman Cepat &amp; Praktis</h3>
+            <p>Proses simulasi dan pengajuan peminjaman buku yang instan dengan kalkulasi tenggat waktu pengembalian otomatis.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-wifi"></i></div>
+            <h3>Ruang Baca &amp; High-Speed Wi-Fi</h3>
+            <p>Nikmati suasana membaca yang tenang dilengkapi dengan pendingin ruangan dan koneksi internet cepat 24/7.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-book-atlas"></i></div>
+            <h3>Akses E-Book &amp; Jurnal</h3>
+            <p>Ratusan artikel ilmiah, e-book eksklusif, dan repositori riset siap diunduh oleh seluruh anggota terdaftar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="brand-logo">
+          <div class="logo-icon"><i class="fa-solid fa-book-bookmark"></i></div>
+          <span class="brand-name">Pustaka<span class="highlight">Nusa</span></span>
+        </div>
+        <p>Solusi manajemen perpustakaan modern berbasis teknologi web interaktif. Siap dideploy langsung ke GitHub Pages.</p>
+      </div>
+
+      <div class="footer-info">
+        <h4><i class="fa-solid fa-clock"></i> Jam Operasional</h4>
+        <p>Senin - Jumat: 08.00 - 17.00 WIB</p>
+        <p>Sabtu: 09.00 - 15.00 WIB</p>
+        <p>Minggu &amp; Hari Libur: Tutup</p>
+      </div>
+
+      <div class="footer-info">
+        <h4><i class="fa-solid fa-location-dot"></i> Lokasi &amp; Kontak</h4>
+        <p>Gedung Perpustakaan Utama Lt. 1-3</p>
+        <p>Email: info@pustakanusa.ac.id</p>
+        <p>Telepon: (021) 555-0192</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container flex-between">
+        <p>&copy; 2026 PustakaNusa Digital Library. Dibuat untuk deployment GitHub Pages.</p>
+        <p><i class="fa-brands fa-github"></i> Ready for GitHub Pages Deployment</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Book Detail Modal -->
+  <div class="modal-overlay hidden" id="book-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="close-book-modal">&times;</button>
+      <div class="modal-body" id="modal-book-content">
+        <!-- Content inserted dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Borrow Simulation Modal -->
+  <div class="modal-overlay hidden" id="borrow-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="close-borrow-modal">&times;</button>
+      <div class="modal-header-custom">
+        <h3><i class="fa-solid fa-hand-holding-hand"></i> Formulir Peminjaman Buku</h3>
+        <p id="borrow-book-title" class="sub-title">Judul Buku</p>
+      </div>
+      <form id="borrow-form" class="borrow-form">
+        <input type="hidden" id="borrow-book-id">
+        
+        <div class="form-group">
+          <label for="borrower-name">Nama Lengkap Peminjam <span class="required">*</span></label>
+          <input type="text" id="borrower-name" placeholder="Masukkan nama Anda..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="borrower-id">NIM / Nomor Anggota <span class="required">*</span></label>
+          <input type="text" id="borrower-id" placeholder="Contoh: 202601992" required>
+        </div>
+
+        <div class="form-group">
+          <label for="borrow-days">Durasi Peminjaman (Hari) <span class="required">*</span></label>
+          <select id="borrow-days" required>
+            <option value="3">3 Hari</option>
+            <option value="7" selected>7 Hari (Standar)</option>
+            <option value="14">14 Hari (Maksimal)</option>
+          </select>
+        </div>
+
+        <div class="borrow-summary">
+          <div class="summary-row">
+            <span>Tanggal Pinjam:</span>
+            <strong id="summary-borrow-date">-</strong>
+          </div>
+          <div class="summary-row">
+            <span>Tenggat Pengembalian:</span>
+            <strong id="summary-return-date" class="text-primary">-</strong>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="cancel-borrow-btn">Batal</button>
+          <button type="submit" class="btn-primary"><i class="fa-solid fa-check"></i> Konfirmasi Pinjam</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- My Borrowed Books Drawer / Modal -->
+  <div class="modal-overlay hidden" id="my-borrowed-modal">
+    <div class="modal-card modal-lg">
+      <button class="modal-close" id="close-my-borrowed-modal">&times;</button>
+      <div class="modal-header-custom">
+        <h3><i class="fa-solid fa-book-bookmark"></i> Daftar Buku Yang Anda Pinjam</h3>
+        <p class="sub-title">Kelola status buku dan proses pengembalian secara mandiri.</p>
+      </div>
+      <div id="my-borrowed-list" class="borrowed-list">
+        <!-- Dynamic list of borrowed items -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
