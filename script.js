@@ -185,6 +185,27 @@ function setupEventListeners() {
     if (e.key === "Enter") handleSearch();
   });
 
+  // Active Navbar Link Scroll Spy
+  const navLinks = document.querySelectorAll(".nav-link");
+  const sections = document.querySelectorAll("section[id]");
+
+  window.addEventListener("scroll", () => {
+    let current = "home";
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 120;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+      }
+    });
+  });
+
   // Category Pills Filter
   const categoryPills = document.querySelectorAll(".pill-btn");
   categoryPills.forEach((pill) => {
